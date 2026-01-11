@@ -1,0 +1,276 @@
+@font-face {
+    font-family: 'Gowun-Dodum';
+    src: url('fonts/GowunDodum-Regular.ttf');
+}
+
+* {
+    font-family: 'Gowun-Dodum', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    /* 자식 요소를 가로 중앙으로 배치 */
+    justify-content: center;
+    /* 자식 요소를 세로 중앙으로 배치 */
+    align-items: center;
+    /* 자식 요소 중에 absolute가 있으면 body가 기준점 역할 */
+    position: relative;
+}
+
+#background-div img {
+    /* 부모 div의 가로 너비에 딱 맞게 설정 */
+    width: 100%;
+    height: auto;
+    /* 이미지를 글자처럼 취급하여 여백이 생성됨 -> 하단 여백 제거 */
+    display: block;
+}
+
+#clock-div {
+    /* 배경화면 위에 overlay */
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    /* 좌우 간 정확히 중앙에 설정 (가로, 세로) */
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    /* 글자 설정 */
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    /* 배경화면에 글자가 묻히지 않도록 그림자 설정 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+#login-div {
+    /* clock-div의 오른쪽에 위치 */
+    position: absolute;
+    top: 15%;
+    /* 오른쪽 끝에서 20px */
+    right: 20px;
+    transform: translate(-50%, -50%);
+
+    width: 180px;
+    /* 창이 줄어들면 90%까지 축소 가능 */
+    max-width: 90%;
+
+    /* 글자 설정 */
+    color: white;
+    font-size: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+    padding: 20px;
+    /* 반투명 효과 */
+    background: rgba(255, 255, 255, 0.2);
+    /* 살짝 흐려지게 만듦 */
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* 화면이 950px 이하일 때 */
+@media (max-width: 950px) {
+    #login-div {
+        /* 기존 top 제거 */
+        top: auto;
+        /* clock 아래쪽에 위치 */     
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%, -50%);
+        /* 기존 right 제거 */
+        right: auto;
+    }
+}
+
+#logged-out {
+    /* 위아래 배치 */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;   
+}
+
+#logged-out input {
+    /* ID 입력창 내부 여백 */
+    padding: 5px 5px;
+    /* 입력창 모서리 둥글게 하는 효과 */
+    border-radius: 5px;
+    border: none;
+    font-size: 0.9rem;
+
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: 0.3s;
+    margin: 0 0 5px 0;
+}
+
+#logged-out button {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 0.8rem;
+    background-color: #b8cef4;
+    cursor: pointer;
+    transition: 0.3s;
+
+    /* 그림자 */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+#logged-out button:hover {
+    background-color: #9fb9eb;
+    /* 그림자 강조 */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 입력창 클릭하면 box-shadow 생성 */
+#logged-out input:focus {
+    box-shadow: 0 0 0 3px rgba(53, 92, 208, 0.5);
+}
+
+#logged-out.hidden {
+    display: none;
+}
+
+#logged-in {
+    /* 위아래 배치 */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+}
+
+#logged-in h3 {
+    font-size: 1.3rem;
+    margin: 0 0 10px 0;
+}
+
+#logged-in button {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 0.8rem;
+    background-color: #b8cef4;
+    cursor: pointer;
+    transition: 0.3s;
+
+    /* 그림자 */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+#logged-in button:hover {
+    background-color: #9fb9eb;
+    /* 그림자 강조 */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+#logged-in.hidden {
+    display: none;
+}
+
+#todo-div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 300px;
+    /* 창이 줄어들면 90%까지 축소 가능 */
+    max-width: 70%;
+
+    color: white;
+    font-size: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+    padding: 20px;
+    background: rgba(40, 35, 35, 0.5);
+    backdrop-filter: blur(5px) saturate(180%);
+    border-radius: 14px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+
+    text-align: center;
+}
+
+#todo-div h3 {
+    font-size: 1.5rem;
+}
+
+#todo-div form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+#todo-div input {
+    flex: 1;
+    font-size: 1rem;
+    /* input + button 너비가 form을 넘어가지 않도록 함 */
+    min-width: 0;
+}
+
+#todo-div button {
+    /* 버튼 줄바꿈 방지 */
+    white-space: nowrap;
+    padding: 8px;
+}
+
+.todo-list {
+    font-size: 1.2rem;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.9);
+
+    /* bullet 제거 */
+    list-style: none;
+    padding-left: 0;
+}
+
+.todo-list li {
+    padding: 10px 0;
+    /* 구분선 */
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    /* 세로 중앙 정렬 */
+    align-items: center;
+    position: relative;
+}
+
+.todo-list li:last-child {
+    /* 마지막 아이템은 하단 구분선 제거 */
+    border-bottom: none;
+}
+
+.todo-list li span {
+    /* 가로 가운데 ([   auto   ][  요소  ][   auto   ]) */
+    margin: 0 auto;
+}
+
+.todo-list li button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #ebebeb;
+    
+    /* 오른쪽 끝 */
+    margin-left: auto;
+}
+
+.todo-list li button:hover {
+    color: #fce4e475;
+}
+
+#weather-div {
+    position: absolute;
+    /* 시계 아래 위치 */
+    top: calc(15% + 50px);
+    left: 50%;
+
+    color: white;
+    font-style: italic;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla.js Chanllenge Project</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://kit.fontawesome.com/6af51cabdd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="background-div"></div>
+    <div id="clock-div">
+        <i class="fa-regular fa-alarm-clock fa-xl" style="color: #ebebeb;"></i>
+        <h1></h1>
+    </div>
+    <div id="login-div">
+        <!-- 로그아웃된 상태 -->
+        <form id="logged-out" class="hidden">
+            <input type="text" placeholder="ID 입력" required />
+            <button>LOGIN</button>
+        </form>
+        <!-- 로그인된 상태 -->
+        <div id="logged-in" class="hidden">
+            <h3></h3>
+            <button>LOGOUT</button>
+        </div>
+    </div>
+    <div id="todo-div">
+        <h3>📝 Today's To-Do</h3>
+        <form>
+            <input type="text" placeholder="오늘의 to-do 입력" required />
+            <button>확인</button>
+        </form>
+        <ul class="todo-list">
+        </ul>
+    </div>
+    <div id="weather-div">
+        <span></span>
+        <span></span>
+    </div>
+
+    <script src="js/background.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="js/weather.js"></script>
+</body>
+</html>
